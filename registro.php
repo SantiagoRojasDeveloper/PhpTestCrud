@@ -13,72 +13,93 @@
 <body>
     <?php $paginaActual = "registro";
     include 'modulos/template/navbar.php' ?>
-    <h1>Registro</h1>
 
-    <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a></p>
+    <main class="container d-flex flex-column align-items-center w-100 my-5">
+        <h1 class="display-5">Registro</h1>
 
-    <?php
-    include('conexion.php');
+        <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí</a></p>
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombre = $_POST["nombre"];
-        $apellidos = $_POST["apellidos"];
-        $email = $_POST["email"];
-        $telefono = $_POST["telefono"];
-        $fecha_nacimiento = $_POST["fecha_nacimiento"];
-        $direccion = $_POST["direccion"];
-        $usuario = $_POST["usuario"];
-        $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-        $sexo = $_POST["sexo"];
-        $rol = "user";
+        <?php
+        include('conexion.php');
 
-        $sql = "INSERT INTO users_data (nombre, apellidos, email, telefono, fecha_nacimiento, direccion, sexo) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $conexion->prepare($sql);
-        $stmt->execute([$nombre, $apellidos, $email, $telefono, $fecha_nacimiento, $direccion, $sexo]);
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $nombre = $_POST["nombre"];
+            $apellidos = $_POST["apellidos"];
+            $email = $_POST["email"];
+            $telefono = $_POST["telefono"];
+            $fecha_nacimiento = $_POST["fecha_nacimiento"];
+            $direccion = $_POST["direccion"];
+            $usuario = $_POST["usuario"];
+            $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+            $sexo = $_POST["sexo"];
+            $rol = "user";
 
-        $lastInsertId = $conexion->lastInsertId();
+            $sql = "INSERT INTO users_data (nombre, apellidos, email, telefono, fecha_nacimiento, direccion, sexo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conexion->prepare($sql);
+            $stmt->execute([$nombre, $apellidos, $email, $telefono, $fecha_nacimiento, $direccion, $sexo]);
 
-        $sql = "INSERT INTO users_login (idUser, usuario, password, rol) VALUES (?, ?, ?, ?)";
-        $stmt = $conexion->prepare($sql);
-        $stmt->execute([$lastInsertId, $usuario, $password, $rol]);
+            $lastInsertId = $conexion->lastInsertId();
 
-        echo "Registro exitoso. <a href='login.php'>Inicia sesión aquí</a>.";
-    }
-    ?>
+            $sql = "INSERT INTO users_login (idUser, usuario, password, rol) VALUES (?, ?, ?, ?)";
+            $stmt = $conexion->prepare($sql);
+            $stmt->execute([$lastInsertId, $usuario, $password, $rol]);
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" required><br>
+            echo "Registro exitoso. <a href='login.php'>Inicia sesión aquí</a>.";
+        }
+        ?>
 
-        <label for="apellidos">Apellidos:</label>
-        <input type="text" name="apellidos" required><br>
+        <form class="d-flex flex-wrap gap-3 justify-content-between mx-5" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <div style="flex-basis: 40%" class="d-flex flex-column">
+                <label for="nombre">Nombre:</label>
+                <input class="form-control" type="text" name="nombre" required><br>
+            </div>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" required><br>
+            <div style="flex-basis: 40%" class="d-flex flex-column">
+                <label for="apellidos">Apellidos:</label>
+                <input class="form-control" type="text" name="apellidos" required><br>
+            </div>
 
-        <label for="telefono">Teléfono:</label>
-        <input type="text" name="telefono" required><br>
+            <div style="flex-basis: 40%" class="d-flex flex-column">
+                <label for="email">Email:</label>
+                <input class="form-control" type="email" name="email" required><br>
+            </div>
 
-        <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-        <input type="date" name="fecha_nacimiento" required><br>
+            <div style="flex-basis: 40%" class="d-flex flex-column">
+                <label for="telefono">Teléfono:</label>
+                <input class="form-control" type="text" name="telefono" required><br>
+            </div>
 
-        <label for="direccion">Dirección:</label>
-        <textarea name="direccion"></textarea><br>
+            <div style="flex-basis: 100%" class="d-flex flex-column">
+                <label for="direccion">Dirección:</label>
+                <textarea style="resize: none" class="form-control" name="direccion"></textarea><br>
+            </div>
 
-        <label for="sexo">Sexo:</label>
-        <select name="sexo">
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
-        </select>
+            <div style="flex-basis: 40%" class="d-flex flex-column">
+                <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                <input class="form-control" type="date" name="fecha_nacimiento" required><br>
+            </div>
 
-        <label for="usuario">Usuario:</label>
-        <input type="text" name="usuario" required><br>
+            <div style="flex-basis: 40%" class="d-flex flex-column">
+                <label for="sexo">Sexo:</label>
+                <select class="form-control" name="sexo">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+            </div>
 
-        <label for="password">Contraseña:</label>
-        <input type="password" name="password" required><br>
+            <div style="flex-basis: 40%" class="d-flex flex-column">
+                <label for="usuario">Usuario:</label>
+                <input class="form-control" type="text" name="usuario" required><br>
+            </div>
 
-        <input type="submit" value="Registrarse">
-    </form>
+            <div style="flex-basis: 40%" class="d-flex flex-column">
+                <label for="password">Contraseña:</label>
+                <input class="form-control" type="password" name="password" required><br>
+            </div>
+
+            <input class="w-100 form-control btn btn-success" type="submit" value="Registrarse">
+        </form>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">

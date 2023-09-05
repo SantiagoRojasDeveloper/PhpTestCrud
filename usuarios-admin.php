@@ -50,9 +50,6 @@
                 </tbody>
             </table>
         </div>
-        
-
-
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

@@ -26,26 +26,31 @@
     }
     ?>
 
-    <main>
-        <form class="form-group container p-2" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <main class="container d-flex flex-column align-items-center">
+        <form class="form-group p-2 w-100" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="nombre">Nombre:</label>
-            <input class="form-control" type="text" name="nombre" value="<?php echo $user_data['nombre'] ?>" required><br>
-
-            <label for="apellidos">Apellidos:</label>
-            <input class="form-control" type="text" name="apellidos" value="<?php echo $user_data['apellidos'] ?>" required><br>
-
-            <label for="email">Email:</label>
-            <input class="form-control" type="email" name="email" value="<?php echo $user_data['email'] ?>" required><br>
-
-            <label for="telefono">Teléfono:</label>
-            <input class="form-control" type="text" name="telefono" value="<?php echo $user_data['telefono'] ?>" required><br>
-
-            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-            <input class="form-control" type="date" name="fecha_nacimiento" value="<?php echo $user_data['fecha_nacimiento'] ?>"
+            <input class="form-control" type="text" name="nombre" value="<?php echo $user_data['nombre'] ?>"
                 required><br>
 
+            <label for="apellidos">Apellidos:</label>
+            <input class="form-control" type="text" name="apellidos" value="<?php echo $user_data['apellidos'] ?>"
+                required><br>
+
+            <label for="email">Email:</label>
+            <input class="form-control" type="email" name="email" value="<?php echo $user_data['email'] ?>"
+                required><br>
+
+            <label for="telefono">Teléfono:</label>
+            <input class="form-control" type="text" name="telefono" value="<?php echo $user_data['telefono'] ?>"
+                required><br>
+
+            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+            <input class="form-control" type="date" name="fecha_nacimiento"
+                value="<?php echo $user_data['fecha_nacimiento'] ?>" required><br>
+
             <label for="direccion">Dirección:</label>
-            <textarea class="form-control" name="direccion" value="<?php echo $user_data['direccion'] ?>"></textarea><br>
+            <textarea class="form-control" name="direccion"
+                value="<?php echo $user_data['direccion'] ?>"></textarea><br>
 
             <label for="sexo">Sexo:</label>
             <select class="form-control" name="sexo">
@@ -58,7 +63,8 @@
             </select>
 
             <label for="usuario">Usuario:</label>
-            <input class="form-control" readonly type="text" name="usuario" value="<?php echo $user_data['usuario'] ?>" required><br>
+            <input class="form-control" readonly type="text" name="usuario" value="<?php echo $user_data['usuario'] ?>"
+                required><br>
 
             <label for="password">Contraseña:</label>
             <input class="form-control" type="password" name="password" required><br>
